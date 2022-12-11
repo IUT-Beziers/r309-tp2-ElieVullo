@@ -15,51 +15,55 @@ def move(a):
 
 def affiche():
 	
-	B4 = Button(can, text='PC', height=2, width=12, bg='ivory', command = PC)
+	B4 = Button(can, text='PC                    ', width=170, bg='ivory', command = PC, image = ImagesBouton[2], compound=RIGHT)
 	B4.pack(side=LEFT)
-	B5 = Button(can, text='Téléphone', height=2, width=12, bg='ivory', command = Telephone)
+	B5 = Button(can, text='Téléphone           ', width=170, bg='ivory', command = Telephone, image = ImagesBouton[3], compound=RIGHT)
 	B5.pack(side=LEFT)
 	can.create_window(66, 400, window=B4)
 	can.create_window(66, 450, window=B5)
+
+def Tsuppr():
+	j = 0
+	while j < 1 :
+		can1.delete(root, can1.find_closest(300, 300)[0] )
 		
 def suppr(position):
 	x = position.x
 	y = position.y
 	item = can1.find_closest(position.x, position.y)[0]
-	if item >= 0:
-		can1.delete(root,item)
+	can1.delete(root,item)
 
 def Switch():
-	Image1 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[0])
+	Image1 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[0])
 	can1.image = Images[0]
 
 def Switch2(S):
-	Image1 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[0])
+	Image1 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[0])
 	can1.image = Images[0]
 
 def Routeur():
-	Image2 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[1])
+	Image2 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[1])
 	can1.image = Images[1]
 	
 def Routeur2(R):
-	Image2 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[1])
+	Image2 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[1])
 	can1.image = Images[1]
 	
 	
 def PC():
-	Image3 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[2])
+	Image3 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[2])
 	can1.image = Images[2]
 	
 def PC2(P):
-	Image3 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[2])
+	Image3 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[2])
 	can1.image = Images[2]
 	
 def Telephone():
-	Image4 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[3])
+	Image4 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[3])
 	can1.image = Images[3]
 	
 def Telephone2(T):
-	Image4 = can1.create_image(random.randint(0,300),random.randint(0,300), image = Images[3])
+	Image4 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[3])
 	can1.image = Images[3]
 	
 root = Tk()
@@ -72,39 +76,61 @@ root.bind("<T>", Telephone2)
 
 
 
-SwitchImage = PhotoImage(file='/home/e/elie.vullo/Téléchargements/SwitchImage.png')
-RouteurImage = PhotoImage(file='/home/e/elie.vullo/Téléchargements/RouteurImage.png')
-PcImage = PhotoImage(file='/home/e/elie.vullo/Téléchargements/PcImage.png')
-TelephoneImage = PhotoImage(file='/home/e/elie.vullo/Téléchargements/TelephoneImage.png')
+SwitchImage = PhotoImage(file='SwitchImage.png')
+RouteurImage = PhotoImage(file='RouteurImage.png')
+PcImage = PhotoImage(file='PcImage.png')
+TelephoneImage = PhotoImage(file='TelephoneImage.png')
+SwitchImageBouton = PhotoImage(file='SwitchImageBouton.png')
+RouteurImageBouton = PhotoImage(file='RouteurImageBouton.png')
+PcImageBouton = PhotoImage(file='PcImageBouton.png')
+TelephoneImageBouton = PhotoImage(file='TelephoneImageBouton.png')
 Images = [SwitchImage, RouteurImage, PcImage, TelephoneImage]
+ImagesBouton = [SwitchImageBouton, RouteurImageBouton, PcImageBouton, TelephoneImageBouton ]
 
-font = font.Font(size=15, weight="bold")
+font = font.Font(weight="bold")
+
 
 can = Canvas(root, width=150, height=720, bg='ivory')
 can.pack(side=LEFT)
-can1 = Canvas(root, width=570, height=720, bg='white')
+can1 = Canvas(root, width=10000, height=720, bg='white')
 can1.bind("<Double-Button-1>", suppr)
 can1.bind("<B1-Motion>", move)
 can1.pack(side=RIGHT)
 
-Label1 = Label(can, text='Menu', width=300, height=7,borderwidth=2, bg='red')
+Label1 = Label(can, text='Menu', width=150, height=7,borderwidth=2, bg='red', justify=CENTER)
 Label1['font'] = font
 Label1.pack()
 
+Label2 = Label(can, text='Double clic pour supprimer ', width=120, height=1, fg='blue')
+Label2.pack()
 
-B1 = Button(can, text='Switch', height=2, width=18, bg='gray', command = Switch)
+Label3 = Label(can, text='un seul objet uniquement ', width=120, height=1, fg='blue')
+Label3.pack()
+
+B1 = Button(can, width=170, bg='gray', command = Switch, text='Switch ', image = ImagesBouton[0], compound = RIGHT)   #Switch
 B1.pack(side=LEFT)
+B1['font'] = font
 
-B2 = Button(can, text='Client', height=2, width=18, bg='gray', command = affiche)
+B2 = Button(can, height = 2, width=150, bg='gray', text = 'Client', command = affiche)
 B2.pack(side=LEFT)
+B2['font'] = font
 
-B3 = Button(can, text='Routeur', height=2, width=18, bg='gray', command = Routeur)
+B3 = Button(can, bg='gray', width=170, text = 'Routeur ', command = Routeur, image = ImagesBouton[1], compound=RIGHT)   
 B3.pack(side=LEFT)
+B3['font'] = font
 
-can.create_window(20, 60, window=Label1)
+B4 = Button(can, text='Tout supprimer', height=2, width=150, bg='gray', command = Tsuppr)
+B4.pack(side=LEFT)
+B4['font'] = font
+
+
+can.create_window(67, 60, window=Label1)
+can.create_window(76, 644, window=Label2)
+can.create_window(76, 661, window=Label3)
 can.create_window(66, 200, window=B1)
 can.create_window(66, 350, window=B2)
 can.create_window(66, 500, window=B3)
+can.create_window(66, 698, window=B4)
 
 
 root.mainloop()
