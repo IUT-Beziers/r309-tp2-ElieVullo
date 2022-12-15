@@ -5,13 +5,21 @@ import random
 
 #Exercice 1 :
 
+def Cable(e):
+	x = e.x
+	y = e.y
+	if can1.old_coords:
+		x1, y1 = can1.old_coords
+		can1.create_line(x, y, x1, y1, width=5)
+	can1.old_coords = x,y
+
 def move(a):
+	bn = 1
 	x = a.x
 	y = a.y
-	item = can1.find_closest(a.x, a.y)[0]
-	if item >= 0:
-		item = can1
-
+	item = can1.find_closest(a.x, a.y)
+	while bn < 1 :
+		item(a.x, a.y) == item(x,y)
 
 def affiche():
 	
@@ -34,36 +42,51 @@ def suppr(position):
 	can1.delete(root,item)
 
 def Switch():
-	Image1 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[0])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image1 = can1.create_image(id1, id2, image = Images[0])
 	can1.image = Images[0]
 
 def Switch2(S):
-	Image1 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[0])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image1 = can1.create_image(id1, id2, image = Images[0])
 	can1.image = Images[0]
 
 def Routeur():
-	Image2 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[1])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image2 = can1.create_image(id1, id2, image = Images[1])
 	can1.image = Images[1]
 	
 def Routeur2(R):
-	Image2 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[1])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image2 = can1.create_image(id1, id2, image = Images[1])
 	can1.image = Images[1]
 	
-	
 def PC():
-	Image3 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[2])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image3 = can1.create_image(id1, id2, image = Images[2])
 	can1.image = Images[2]
 	
 def PC2(P):
-	Image3 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[2])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image3 = can1.create_image(id1, id2, image = Images[2])
 	can1.image = Images[2]
 	
 def Telephone():
-	Image4 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[3])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image4 = can1.create_image(id1, id2, image = Images[3])
 	can1.image = Images[3]
 	
 def Telephone2(T):
-	Image4 = can1.create_image(random.randint(150,300),random.randint(150,300), image = Images[3])
+	id1 = Zone1.get()
+	id2 = Zone2.get()
+	Image4 = can1.create_image(id1, id2, image = Images[3])
 	can1.image = Images[3]
 	
 root = Tk()
@@ -73,7 +96,6 @@ root.bind("<S>", Switch2)
 root.bind("<R>", Routeur2)
 root.bind("<P>", PC2)
 root.bind("<T>", Telephone2)
-
 
 
 SwitchImage = PhotoImage(file='SwitchImage.png')
@@ -94,10 +116,23 @@ can = Canvas(root, width=150, height=720, bg='ivory')
 can.pack(side=LEFT)
 can1 = Canvas(root, width=10000, height=720, bg='white')
 can1.bind("<Double-Button-1>", suppr)
-can1.bind("<B1-Motion>", move)
+can1.bind("<ButtonPress-1>", Cable)
 can1.pack(side=RIGHT)
+can1.old_coords = None
 
-Label1 = Label(can, text='Menu', width=150, height=7,borderwidth=2, bg='red', justify=CENTER)
+Zone1 = Entry(can, width=10)
+Zone1.pack()
+
+Zone2 = Entry(can, width=10)
+Zone2.pack()
+
+Label0 = Label(can, text='Choisir les coordonnées', width=120, height=1, fg='blue')
+Label0.pack()
+
+Label01 = Label(can, text='de vos objets', width=120, height=1, fg='blue')
+Label01.pack()
+
+Label1 = Label(can, text='Menu', width=150, height=3,borderwidth=2, bg='red', justify=CENTER)
 Label1['font'] = font
 Label1.pack()
 
@@ -106,6 +141,12 @@ Label2.pack()
 
 Label3 = Label(can, text='un seul objet uniquement ', width=120, height=1, fg='blue')
 Label3.pack()
+
+Label4 = Label(can, text='Clique Gauche pour choisir', width=120, height=1, fg='blue')
+Label4.pack()
+
+Label5 = Label(can, text='où mettre les câbles', width=120, height=1, fg='blue')
+Label5.pack()
 
 B1 = Button(can, width=170, bg='gray', command = Switch, text='Switch ', image = ImagesBouton[0], compound = RIGHT)   #Switch
 B1.pack(side=LEFT)
@@ -124,13 +165,20 @@ B4.pack(side=LEFT)
 B4['font'] = font
 
 
-can.create_window(67, 60, window=Label1)
+can.create_window(35, 125, window=Zone1)
+can.create_window(115, 125, window=Zone2)
+can.create_window(67, 72, window=Label0)
+can.create_window(67, 88, window=Label01)
+can.create_window(67, 30, window=Label1)
 can.create_window(76, 644, window=Label2)
+can.create_window(75, 578, window=Label4)
+can.create_window(66, 594, window=Label5)
 can.create_window(76, 661, window=Label3)
 can.create_window(66, 200, window=B1)
 can.create_window(66, 350, window=B2)
 can.create_window(66, 500, window=B3)
 can.create_window(66, 698, window=B4)
+
 
 
 root.mainloop()
